@@ -2,40 +2,43 @@ package main
 
 import "fmt"
 
-type contactInfo struct {
+type zooInfo struct {
+	town    string
 	email   string
 	pinCode int
 }
 
-type person struct {
-	firstName string
-	lastName  string
-	contactInfo
+type animal struct {
+	name  string
+	sound string
+	zooInfo
 }
 
 func main() {
 
-	alex := person{
-		firstName: "Alex",
-		lastName:  "Anderson",
-		contactInfo: contactInfo{
+	cat := animal{
+		name:  "Cat",
+		sound: "Meeeaaawwwwww",
+		zooInfo: zooInfo{
+			town:    "California",
 			email:   "abc@xyz.com",
 			pinCode: 12345,
 		},
 	}
 
-	alex.print("Original Structure")
-	alexPointer := &alex
-	alexPointer.updateFirstName("Tom")
+	cat.print("Original Structure")
+	catPointer := &cat
+	catPointer.updateAttributes("Dog", "Woof Woof Woof")
 
-	alex.print("Updated Struct")
+	cat.print("Updated Struct")
 }
 
-func (p *person) updateFirstName(newName string) {
-	(*p).firstName = newName
+func (p *animal) updateAttributes(newName string, sound string) {
+	(*p).name = newName
+	(*p).sound = sound
 }
 
-func (p person) print(text string) {
+func (p animal) print(text string) {
 	result := fmt.Sprintf("%s ==> %+v \n \n", text, p)
 	fmt.Printf("%+v", result)
 }
